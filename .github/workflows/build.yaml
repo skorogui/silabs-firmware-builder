@@ -101,6 +101,7 @@ jobs:
     needs: [check-container]
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       packages: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -155,6 +156,9 @@ jobs:
     name: Firmware builder
     needs: [list-manifests, check-container, build-container]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     container:
       image: ${{ needs.check-container.outputs.container_name }}
       options: --user root
